@@ -1,0 +1,11 @@
+E:\Project Files\jazTranslator\jazTranslator\jazTranslator\bin\Debug\netcoreapp2.0\jazTranslator.deps.json
+E:\Project Files\jazTranslator\jazTranslator\jazTranslator\bin\Debug\netcoreapp2.0\jazTranslator.runtimeconfig.json
+E:\Project Files\jazTranslator\jazTranslator\jazTranslator\bin\Debug\netcoreapp2.0\jazTranslator.runtimeconfig.dev.json
+E:\Project Files\jazTranslator\jazTranslator\jazTranslator\bin\Debug\netcoreapp2.0\jazTranslator.dll
+E:\Project Files\jazTranslator\jazTranslator\jazTranslator\bin\Debug\netcoreapp2.0\jazTranslator.pdb
+E:\Project Files\jazTranslator\jazTranslator\jazTranslator\obj\Debug\netcoreapp2.0\jazTranslator.csprojResolveAssemblyReference.cache
+E:\Project Files\jazTranslator\jazTranslator\jazTranslator\obj\Debug\netcoreapp2.0\jazTranslator.csproj.CoreCompileInputs.cache
+E:\Project Files\jazTranslator\jazTranslator\jazTranslator\obj\Debug\netcoreapp2.0\jazTranslator.AssemblyInfoInputs.cache
+E:\Project Files\jazTranslator\jazTranslator\jazTranslator\obj\Debug\netcoreapp2.0\jazTranslator.AssemblyInfo.cs
+E:\Project Files\jazTranslator\jazTranslator\jazTranslator\obj\Debug\netcoreapp2.0\jazTranslator.dll
+E:\Project Files\jazTranslator\jazTranslator\jazTranslator\obj\Debug\netcoreapp2.0\jazTranslator.pdb
