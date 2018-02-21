@@ -23,6 +23,15 @@ namespace jazTranslator
                     case "show":
                         show(instructionList);
                         break;
+                    case "push":
+                        push(instructionList);
+                        break;
+                    case "rvalue":
+                        rvalue(instructionList);
+                        break;
+                    case "lvalue":
+                        lvalue(instructionList);
+                        break;
                     default:
                         break;
 
@@ -45,6 +54,22 @@ namespace jazTranslator
             newInstruction = newInstruction + "\" << endl;";
             outputLines.Add(newInstruction);
         }
+        static void push(List<string> instruction)
+        {
+            string value = instruction[1];
+            outputLines.Add("stack.push(" + value + ");");
+        }
+        static void rvalue(List<string> instruction)
+        {
+            string variable = instruction[1];
+            outputLines.Add("stack.push(" + variable + ");");
+        }
+        static void lvalue(List<string> instruction)
+        {
+            string variable = instruction[1];
+            outputLines.Add("int " + variable + ";");
+            outputLines.Add("stack.push(" + variable + "*);");
+        }
         static void initialzeProgram()
         {
             if (File.Exists(@"E:\Project Files\jazTranslator\jazTranslator\jazTranslator\output.cpp"))
@@ -57,8 +82,10 @@ namespace jazTranslator
                 sw.WriteLine("# include \"stdafx.h\"");
                 sw.WriteLine("# include <iostream>");
                 sw.WriteLine("# include <string>");
+                sw.WriteLine("# include <stack>");
                 sw.WriteLine("using namespace std;");
                 sw.WriteLine("int main() {");
+                sw.WriteLine("stack<int> stack;");
             }
         }
         static void finishProgram()
