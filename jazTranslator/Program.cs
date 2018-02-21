@@ -10,39 +10,26 @@ namespace jazTranslator
         static List<string> outputLines = new List<string>();
         static void Main(string[] args)
         {
+            initialzeProgram();
             string line;
             string instruction;
             StreamReader file = new StreamReader(@"E:\Project Files\jazTranslator\jazTranslator\jazTranslator\jaz specs and examples (1)\demo.jaz");
             while ((line = file.ReadLine()) != null)
             {
-                Console.WriteLine(line);
-                List<string> instructionArrary = line.Split().ToList();
-                instruction = instructionArrary[0];
+                List<string> instructionList = line.Split().ToList();
+                instruction = instructionList[0];
                 switch (instruction)
                 {
                     case "show":
-                        show(instructionArrary);
+                        show(instructionList);
                         break;
                     default:
                         break;
 
                 }
-
-            }
-            if (File.Exists(@"E:\Project Files\jazTranslator\jazTranslator\jazTranslator\output.cpp"))
-            {
-                File.Delete(@"E:\Project Files\jazTranslator\jazTranslator\jazTranslator\output.cpp");
             }
 
-            // Create a file to write to.
-            using (StreamWriter sw = File.CreateText(@"E:\Project Files\jazTranslator\jazTranslator\jazTranslator\output.cpp"))
-            {
-                for (int i = 0; i < outputLines.Count; i++)
-                {
-                    sw.WriteLine(outputLines[i]);
-                }
-                sw.Close();
-            }
+            finishProgram();
 
             Console.ReadLine();
         }
@@ -57,6 +44,34 @@ namespace jazTranslator
             }
             newInstruction = newInstruction + "\" << endl;";
             outputLines.Add(newInstruction);
+        }
+        static void initialzeProgram()
+        {
+            if (File.Exists(@"E:\Project Files\jazTranslator\jazTranslator\jazTranslator\output.cpp"))
+            {
+                File.Delete(@"E:\Project Files\jazTranslator\jazTranslator\jazTranslator\output.cpp");
+            }
+
+            using (StreamWriter sw = File.CreateText(@"E:\Project Files\jazTranslator\jazTranslator\jazTranslator\output.cpp"))
+            {
+                sw.WriteLine("# include \"stdafx.h\"");
+                sw.WriteLine("# include <iostream>");
+                sw.WriteLine("# include <string>");
+                sw.WriteLine("using namespace std;");
+                sw.WriteLine("int main() {");
+            }
+        }
+        static void finishProgram()
+        {
+            using (StreamWriter sw = new StreamWriter(@"E:\Project Files\jazTranslator\jazTranslator\jazTranslator\output.cpp", true))
+            {
+                for (int i = 0; i < outputLines.Count; i++)
+                {
+                    sw.WriteLine(outputLines[i]);
+                }
+                sw.WriteLine("}");
+                sw.Close();
+            }
         }
     }
 }
