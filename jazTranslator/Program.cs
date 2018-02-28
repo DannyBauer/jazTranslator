@@ -52,7 +52,7 @@ namespace jazTranslator
                         copy();
                         break;
                     case "label":
-                        if (inputLines[i + 1].Split().ToList()[0] == "")
+                        if (inputLines[i + 1].Split().ToList()[0] == "" && inputLines[i].Split().ToList()[0] != "")
                         {
                             label_function(instructionList);
                         }
@@ -78,6 +78,39 @@ namespace jazTranslator
                         break;
                     case "-":
                         minus(instructionList);
+                        break;
+                    case "*":
+                        multiply(instructionList);
+                        break;
+                    case "/":
+                        divide(instructionList);
+                        break;
+                    case "div":
+                        remainder(instructionList);
+                        break;
+                    case "&":
+                        and(instructionList);
+                        break;
+                    case "|":
+                        or(instructionList);
+                        break;
+                    case "!":
+                        negate(instructionList);
+                        break;
+                    case "<>":
+                        compare(instructionList);
+                        break;
+                    case "<=":
+                        lessThanOrEqual(instructionList);
+                        break;
+                    case ">=":
+                        greaterThanOrEqual(instructionList);
+                        break;
+                    case "<":
+                        lessThan(instructionList);
+                        break;
+                    case ">":
+                        greaterThan(instructionList);
                         break;
                     case "print":
                         print();
@@ -105,9 +138,14 @@ namespace jazTranslator
             newInstruction = newInstruction + "cout << \"";
             for (int i = iterator + 1; i < wordCount; i++)
             {
+                if (newInstruction.Contains("\""))
+                {
+                    newInstruction.Replace("\"", "\\" + "\""); 
+                }
                 newInstruction = newInstruction + " " + instruction[i];
             }
             newInstruction = newInstruction + "\" << endl;";
+
             if (outputListTracker == 0)
                 outputLines.Add(newInstruction);
             else
@@ -203,7 +241,7 @@ namespace jazTranslator
         }
         static void label_function(List<string> instruction)
         {
-            functionLines.Add("void " + instruction[iterator + 1] + "() {");
+            functionLines.Add("int " + instruction[iterator + 1] + "() {");
             outputListTracker = 1;
         }
         static void go_to(List<string> instruction)
@@ -274,6 +312,7 @@ namespace jazTranslator
         }
         static void return_()
         {
+            functionLines.Add("return 0;");
             functionLines.Add("}");
             outputListTracker = 0;
         }
@@ -281,11 +320,11 @@ namespace jazTranslator
         {
             if (outputListTracker == 0)
             {
-                outputLines.Add("int_stack.push_back(int_stack[int_stack.size() - 1] + int_stack[int_stack.size() - 2]);");
+                outputLines.Add("int_stack.push_back(int_stack[int_stack.size() - 2] + int_stack[int_stack.size() - 1]);");
             }
             else
             {
-                functionLines.Add("int_stack.push_back(int_stack[int_stack.size() - 1] + int_stack[int_stack.size() - 2]);");
+                functionLines.Add("int_stack.push_back(int_stack[int_stack.size() - 2] + int_stack[int_stack.size() - 1]);");
             }
         }
 
@@ -293,13 +332,176 @@ namespace jazTranslator
         {
             if (outputListTracker == 0)
             {
-                outputLines.Add("int_stack.push_back(int_stack[int_stack.size() - 1] - int_stack[int_stack.size() - 2]);");
+                outputLines.Add("int_stack.push_back(int_stack[int_stack.size() - 2] - int_stack[int_stack.size() - 1]);");
             }
             else
             {
-                functionLines.Add("int_stack.push_back(int_stack[int_stack.size() - 1] - int_stack[int_stack.size() - 2]);");
+                functionLines.Add("int_stack.push_back(int_stack[int_stack.size() - 2] - int_stack[int_stack.size() - 1]);");
             }
         }
+
+        static void multiply(List<string> instruction)
+        {
+            if (outputListTracker == 0)
+            {
+                outputLines.Add("int_stack.push_back(int_stack[int_stack.size() - 2] * int_stack[int_stack.size() - 1]);");
+            }
+            else
+            {
+                functionLines.Add("int_stack.push_back(int_stack[int_stack.size() - 2] * int_stack[int_stack.size() - 1]);");
+            }
+        }
+
+        static void divide(List<string> instruction)
+        {
+            if (outputListTracker == 0)
+            {
+                outputLines.Add("int_stack.push_back(int_stack[int_stack.size() - 2] / int_stack[int_stack.size() - 1]);");
+            }
+            else
+            {
+                functionLines.Add("int_stack.push_back(int_stack[int_stack.size() - 2] / int_stack[int_stack.size() - 1]);");
+            }
+        }
+
+        static void remainder(List<string> instruction)
+        {
+            if (outputListTracker == 0)
+            {
+                outputLines.Add("int_stack.push_back(int_stack[int_stack.size() - 2] % int_stack[int_stack.size() - 1]);");
+            }
+            else
+            {
+                functionLines.Add("int_stack.push_back(int_stack[int_stack.size() - 2] % int_stack[int_stack.size() - 1]);");
+            }
+        }
+
+        static void and(List<string> instruction)
+        {
+            if (outputListTracker == 0)
+            {
+                outputLines.Add("int_stack.push_back(int_stack[int_stack.size() - 2] && int_stack[int_stack.size() - 1]);");
+            }
+            else
+            {
+                functionLines.Add("int_stack.push_back(int_stack[int_stack.size() - 2] && int_stack[int_stack.size() - 1]);");
+            }
+        }
+
+        static void negate(List<string> instruction)
+        {
+            if (outputListTracker == 0)
+            {
+                outputLines.Add("int_stack.push_back(!int_stack[int_stack.size() - 1]);");
+            }
+            else
+            {
+                functionLines.Add("int_stack.push_back(!int_stack[int_stack.size() - 1]);");
+            }
+        }
+
+        static void or(List<string> instruction)
+        {
+            if (outputListTracker == 0)
+            {
+                outputLines.Add("int_stack.push_back(int_stack[int_stack.size() - 2] || int_stack[int_stack.size() - 1]);");
+            }
+            else
+            {
+                functionLines.Add("int_stack.push_back(int_stack[int_stack.size() - 2] || int_stack[int_stack.size() - 1]);");
+            }
+        }
+
+        static void compare(List<string> instruction)
+        {
+            if (outputListTracker == 0)
+            {
+                outputLines.Add("if(int_stack[int_stack.size() - 2] == int_stack[int_stack.size() - 1])");
+                outputLines.Add("int_stack.push_back(0);");
+                outputLines.Add("else");
+                outputLines.Add("int_stack.push_back(1);");
+            }
+            else
+            {
+                functionLines.Add("if(int_stack[int_stack.size() - 2] == int_stack[int_stack.size() - 1])");
+                functionLines.Add("int_stack.push_back(0);");
+                functionLines.Add("else");
+                functionLines.Add("int_stack.push_back(1);");
+            }
+        }
+
+        static void lessThanOrEqual(List<string> instruction)
+        {
+            if (outputListTracker == 0)
+            {
+                outputLines.Add("if(int_stack[int_stack.size() - 2] <= int_stack[int_stack.size() - 1])");
+                outputLines.Add("int_stack.push_back(1);");
+                outputLines.Add("else");
+                outputLines.Add("int_stack.push_back(0);");
+            }
+            else
+            {
+                functionLines.Add("if(int_stack[int_stack.size() - 2] <= int_stack[int_stack.size() - 1])");
+                functionLines.Add("int_stack.push_back(1);");
+                functionLines.Add("else");
+                functionLines.Add("int_stack.push_back(0);");
+            }
+        }
+
+        static void greaterThanOrEqual(List<string> instruction)
+        {
+            if (outputListTracker == 0)
+            {
+                outputLines.Add("if(int_stack[int_stack.size() - 2] >= int_stack[int_stack.size() - 1])");
+                outputLines.Add("int_stack.push_back(1);");
+                outputLines.Add("else");
+                outputLines.Add("int_stack.push_back(0);");
+            }
+            else
+            {
+                functionLines.Add("if(int_stack[int_stack.size() - 2] >= int_stack[int_stack.size() - 1])");
+                functionLines.Add("int_stack.push_back(1);");
+                functionLines.Add("else");
+                functionLines.Add("int_stack.push_back(0);");
+            }
+        }
+
+        static void lessThan(List<string> instruction)
+        {
+            if (outputListTracker == 0)
+            {
+                outputLines.Add("if(int_stack[int_stack.size() - 2] < int_stack[int_stack.size() - 1])");
+                outputLines.Add("int_stack.push_back(1);");
+                outputLines.Add("else");
+                outputLines.Add("int_stack.push_back(0);");
+            }
+            else
+            {
+                functionLines.Add("if(int_stack[int_stack.size() - 2] < int_stack[int_stack.size() - 1])");
+                functionLines.Add("int_stack.push_back(1);");
+                functionLines.Add("else");
+                functionLines.Add("int_stack.push_back(0);");
+            }
+        }
+
+        static void greaterThan(List<string> instruction)
+        {
+            if (outputListTracker == 0)
+            {
+                outputLines.Add("if(int_stack[int_stack.size() - 2] > int_stack[int_stack.size() - 1])");
+                outputLines.Add("int_stack.push_back(1);");
+                outputLines.Add("else");
+                outputLines.Add("int_stack.push_back(0);");
+            }
+            else
+            {
+                functionLines.Add("if(int_stack[int_stack.size() - 2] > int_stack[int_stack.size() - 1])");
+                functionLines.Add("int_stack.push_back(1);");
+                functionLines.Add("else");
+                functionLines.Add("int_stack.push_back(0);");
+            }
+        }
+
         static void initialzeProgram()
         {
             if (File.Exists("output.cpp"))
@@ -320,7 +522,7 @@ namespace jazTranslator
                 {
                     variables.Add(instructionList[iterator + 1]);
                 }
-                if (instruction == "label" && inputLines[i + 1].Split().ToList()[0] == "")
+                if (instruction == "label" && inputLines[i + 1].Split().ToList()[0] == "" && inputLines[i].Split().ToList()[0] != "")
                 {
                     functions.Add(instructionList[iterator + 1]);
                 }
@@ -340,7 +542,7 @@ namespace jazTranslator
                 }
                 for (int i = 0; i < functions.Count; i++)
                 {
-                    sw.WriteLine("void " + functions[i] + "();");
+                    sw.WriteLine("int " + functions[i] + "();");
                 }
                 sw.WriteLine("vector<int> int_stack;");
                 sw.WriteLine("vector<int*>pointer_stack;");
@@ -368,7 +570,7 @@ namespace jazTranslator
         static void readJazLines()
         {
             string line;
-            StreamReader file = new StreamReader(@"jaz specs and examples (1)\demo.jaz");
+            StreamReader file = new StreamReader(@"jaz specs and examples (1)\operatorsTest.jaz");
             while ((line = file.ReadLine()) != null)
             {
                 inputLines.Add(line);
