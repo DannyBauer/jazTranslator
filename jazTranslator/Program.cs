@@ -279,97 +279,25 @@ namespace jazTranslator
         }
         static void plus(List<string> instruction)
         {
-            string variable1, variable2;
-            if (variableCount < variables.Count)
-            {
-                variable1 = variables[variableCount];
-                variableCount++;
-            }
-            else
-            {
-                variable1 = "int " + RandomString(10);
-            }
-
             if (outputListTracker == 0)
             {
-                outputLines.Add(variable1 + " = int_stack.back();");
-                outputLines.Add("int_stack.pop_back();");
+                outputLines.Add("int_stack.push_back(int_stack[int_stack.size() - 1] + int_stack[int_stack.size() - 2]);");
             }
             else
             {
-                functionLines.Add(variable1 + " = int_stack.back();");
-                functionLines.Add("int_stack.pop_back();");
-            }
-
-            if (variableCount < variables.Count)
-            {
-                variable2 = variables[variableCount];
-                variableCount++;
-            }
-            else
-            {
-                variable2 = "int " + RandomString(10);
-            }
-
-            if (outputListTracker == 0)
-            {
-                outputLines.Add(variable2 + " = int_stack.back();");
-                outputLines.Add("int_stack.pop_back();");
-                outputLines.Add("int_stack.push_back(" + variable1 + " + " + variable2 + ");");
-            }
-            else
-            {
-                functionLines.Add(variable2 + " = int_stack.back();");
-                functionLines.Add("int_stack.pop_back();");
-                functionLines.Add("int_stack.push_back(" + variable1 + " + " + variable2 + ");");
+                functionLines.Add("int_stack.push_back(int_stack[int_stack.size() - 1] + int_stack[int_stack.size() - 2]);");
             }
         }
 
         static void minus(List<string> instruction)
         {
-            string variable1, variable2;
-            if (variableCount < variables.Count)
-            {
-                variable1 = variables[variableCount];
-                variableCount++;
-            }
-            else
-            {
-                variable1 = RandomString(10);
-            }
-
             if (outputListTracker == 0)
             {
-                outputLines.Add(variable1 + " = int_stack.back();");
-                outputLines.Add("int_stack.pop_back();");
+                outputLines.Add("int_stack.push_back(int_stack[int_stack.size() - 1] - int_stack[int_stack.size() - 2]);");
             }
             else
             {
-                functionLines.Add(variable1 + " = int_stack.back();");
-                functionLines.Add("int_stack.pop_back();");
-            }
-
-            if (variableCount < variables.Count)
-            {
-                variable2 = variables[variableCount];
-                variableCount++;
-            }
-            else
-            {
-                variable2 = "int " + RandomString(10);
-            }
-
-            if (outputListTracker == 0)
-            {
-                outputLines.Add(variable2 + " = int_stack.back();");
-                outputLines.Add("int_stack.pop_back();");
-                outputLines.Add("int_stack.push_back(" + variable1 + " - " + variable2 + ");");
-            }
-            else
-            {
-                functionLines.Add(variable2 + " = int_stack.back();");
-                functionLines.Add("int_stack.pop_back();");
-                functionLines.Add("int_stack.push_back(" + variable1 + " - " + variable2 + ");");
+                functionLines.Add("int_stack.push_back(int_stack[int_stack.size() - 1] - int_stack[int_stack.size() - 2]);");
             }
         }
         static void initialzeProgram()
