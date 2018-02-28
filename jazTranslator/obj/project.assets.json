@@ -664,8 +664,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dbaue\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
+    "C:\\Users\\d.bauer\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -674,20 +673,18 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\dbaue\\source\\repos\\jazTranslator\\jazTranslator\\jazTranslator.csproj",
+      "projectUniqueName": "E:\\Project Files\\jazTranslator\\jazTranslator\\jazTranslator\\jazTranslator.csproj",
       "projectName": "jazTranslator",
-      "projectPath": "C:\\Users\\dbaue\\source\\repos\\jazTranslator\\jazTranslator\\jazTranslator.csproj",
-      "packagesPath": "C:\\Users\\dbaue\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dbaue\\source\\repos\\jazTranslator\\jazTranslator\\obj\\",
+      "projectPath": "E:\\Project Files\\jazTranslator\\jazTranslator\\jazTranslator\\jazTranslator.csproj",
+      "packagesPath": "C:\\Users\\d.bauer\\.nuget\\packages\\",
+      "outputPath": "E:\\Project Files\\jazTranslator\\jazTranslator\\jazTranslator\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\dbaue\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+        "C:\\Users\\d.bauer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
@@ -712,7 +709,7 @@
         "dependencies": {
           "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "[2.0.0, )",
+            "version": "2.0.0",
             "autoReferenced": true
           }
         },

@@ -116,9 +116,9 @@ namespace jazTranslator
         static void print()
         {
             if (outputListTracker == 0)
-                outputLines.Add("cout << int_stack.top() << endl;");
+                outputLines.Add("cout << int_stack.back() << endl;");
             else
-                functionLines.Add("cout << int_stack.top() << endl;");
+                functionLines.Add("cout << int_stack.back() << endl;");
         }
         static void push(List<string> instruction)
         {
@@ -126,18 +126,18 @@ namespace jazTranslator
             
 
             if (outputListTracker == 0)
-                outputLines.Add("int_stack.push(" + value + ");");
+                outputLines.Add("int_stack.push_back(" + value + ");");
             else
-                functionLines.Add("int_stack.push(" + value + ");");
+                functionLines.Add("int_stack.push_back(" + value + ");");
         }
         static void rvalue(List<string> instruction)
         {
             string variable = instruction[iterator + 1];
 
             if (outputListTracker == 0)
-                outputLines.Add("int_stack.push(" + variable + ");");
+                outputLines.Add("int_stack.push_back(" + variable + ");");
             else
-                functionLines.Add("int_stack.push(" + variable + ");");
+                functionLines.Add("int_stack.push_back(" + variable + ");");
 
         }
         static void lvalue(List<string> instruction)
@@ -145,34 +145,34 @@ namespace jazTranslator
             string variable = instruction[iterator + 1];
            
             if (outputListTracker == 0)
-                outputLines.Add("pointer_stack.push(&" + variable + ");");
+                outputLines.Add("pointer_stack.push_back(&" + variable + ");");
             else
-                functionLines.Add("pointer_stack.push(&" + variable + ");");
+                functionLines.Add("pointer_stack.push_back(&" + variable + ");");
         }
         static void equals()
         {
             if (outputListTracker == 0)
             {
-                outputLines.Add("*(int *)pointer_stack.top() = int_stack.top();");
-                outputLines.Add("pointer_stack.pop();");
-                outputLines.Add("int_stack.pop();");
+                outputLines.Add("*(int *)pointer_stack.back() = int_stack.back();");
+                outputLines.Add("pointer_stack.pop_back();");
+                outputLines.Add("int_stack.pop_back();");
             }
             else
             {
-                functionLines.Add("*(int *)pointer_stack.top() = int_stack.top();");
-                functionLines.Add("pointer_stack.pop();");
-                functionLines.Add("int_stack.pop();");
+                functionLines.Add("*(int *)pointer_stack.back() = int_stack.back();");
+                functionLines.Add("pointer_stack.pop_back();");
+                functionLines.Add("int_stack.pop_back();");
             }
         }
         static void pop()
         {
             if (outputListTracker == 0)
             {
-                outputLines.Add("int_stack.pop();");
+                outputLines.Add("int_stack.pop_back();");
             }
             else
             {
-                functionLines.Add("int_stack.pop();");
+                functionLines.Add("int_stack.pop_back();");
             }
         }
         static void copy()
@@ -181,13 +181,13 @@ namespace jazTranslator
 
             if (outputListTracker == 0)
             {
-                outputLines.Add("int copy = int_stack.top();");
-                outputLines.Add("int_stack.push(copy);");
+                outputLines.Add("int copy = int_stack.back();");
+                outputLines.Add("int_stack.push_back(copy);");
             }
             else
             {
-                functionLines.Add("int copy = int_stack.top();");
-                functionLines.Add("int_stack.push(copy);");
+                functionLines.Add("int copy = int_stack.back();");
+                functionLines.Add("int_stack.push_back(copy);");
             }
         }
         static void label(List<string> instruction)
@@ -233,16 +233,16 @@ namespace jazTranslator
         {        
             if (outputListTracker == 0)
             {
-                outputLines.Add("if (int_stack.top() == 0) {");
+                outputLines.Add("if (int_stack.back() == 0) {");
                 outputLines.Add("goto label_" + instruction[iterator + 1] + "; }");
-                outputLines.Add("int_stack.pop();");
+                outputLines.Add("int_stack.pop_back();");
 
             }
             else
             {
-                functionLines.Add("if (int_stack.top() == 0) {");
+                functionLines.Add("if (int_stack.back() == 0) {");
                 functionLines.Add("goto label_" + instruction[iterator + 1] + "; }");
-                functionLines.Add("int_stack.pop();");
+                functionLines.Add("int_stack.pop_back();");
 
             }
         }
@@ -250,15 +250,15 @@ namespace jazTranslator
         {
             if (outputListTracker == 0)
             {
-                outputLines.Add("if (int_stack.top() != 0) {");
+                outputLines.Add("if (int_stack.back() != 0) {");
                 outputLines.Add("goto label_" + instruction[iterator + 1] + "; }");
-                outputLines.Add("int_stack.pop();");
+                outputLines.Add("int_stack.pop_back();");
             }
             else
             {
-                functionLines.Add("if (int_stack.top() != 0) {");
+                functionLines.Add("if (int_stack.back() != 0) {");
                 functionLines.Add("goto label_" + instruction[iterator + 1] + "; }");
-                functionLines.Add("int_stack.pop();");
+                functionLines.Add("int_stack.pop_back();");
             }
         }
         static void halt()
@@ -292,13 +292,13 @@ namespace jazTranslator
 
             if (outputListTracker == 0)
             {
-                outputLines.Add(variable1 + " = int_stack.top();");
-                outputLines.Add("int_stack.pop();");
+                outputLines.Add(variable1 + " = int_stack.back();");
+                outputLines.Add("int_stack.pop_back();");
             }
             else
             {
-                functionLines.Add(variable1 + " = int_stack.top();");
-                functionLines.Add("int_stack.pop();");
+                functionLines.Add(variable1 + " = int_stack.back();");
+                functionLines.Add("int_stack.pop_back();");
             }
 
             if (variableCount < variables.Count)
@@ -313,15 +313,15 @@ namespace jazTranslator
 
             if (outputListTracker == 0)
             {
-                outputLines.Add(variable2 + " = int_stack.top();");
-                outputLines.Add("int_stack.pop();");
-                outputLines.Add("int_stack.push(" + variable1 + " + " + variable2 + ");");
+                outputLines.Add(variable2 + " = int_stack.back();");
+                outputLines.Add("int_stack.pop_back();");
+                outputLines.Add("int_stack.push_back(" + variable1 + " + " + variable2 + ");");
             }
             else
             {
-                functionLines.Add(variable2 + " = int_stack.top();");
-                functionLines.Add("int_stack.pop();");
-                functionLines.Add("int_stack.push(" + variable1 + " + " + variable2 + ");");
+                functionLines.Add(variable2 + " = int_stack.back();");
+                functionLines.Add("int_stack.pop_back();");
+                functionLines.Add("int_stack.push_back(" + variable1 + " + " + variable2 + ");");
             }
         }
 
@@ -340,13 +340,13 @@ namespace jazTranslator
 
             if (outputListTracker == 0)
             {
-                outputLines.Add(variable1 + " = int_stack.top();");
-                outputLines.Add("int_stack.pop();");
+                outputLines.Add(variable1 + " = int_stack.back();");
+                outputLines.Add("int_stack.pop_back();");
             }
             else
             {
-                functionLines.Add(variable1 + " = int_stack.top();");
-                functionLines.Add("int_stack.pop();");
+                functionLines.Add(variable1 + " = int_stack.back();");
+                functionLines.Add("int_stack.pop_back();");
             }
 
             if (variableCount < variables.Count)
@@ -361,15 +361,15 @@ namespace jazTranslator
 
             if (outputListTracker == 0)
             {
-                outputLines.Add(variable2 + " = int_stack.top();");
-                outputLines.Add("int_stack.pop();");
-                outputLines.Add("int_stack.push(" + variable1 + " - " + variable2 + ");");
+                outputLines.Add(variable2 + " = int_stack.back();");
+                outputLines.Add("int_stack.pop_back();");
+                outputLines.Add("int_stack.push_back(" + variable1 + " - " + variable2 + ");");
             }
             else
             {
-                functionLines.Add(variable2 + " = int_stack.top();");
-                functionLines.Add("int_stack.pop();");
-                functionLines.Add("int_stack.push(" + variable1 + " - " + variable2 + ");");
+                functionLines.Add(variable2 + " = int_stack.back();");
+                functionLines.Add("int_stack.pop_back();");
+                functionLines.Add("int_stack.push_back(" + variable1 + " - " + variable2 + ");");
             }
         }
         static void initialzeProgram()
@@ -403,7 +403,7 @@ namespace jazTranslator
                 sw.WriteLine("# include \"stdafx.h\"");
                 sw.WriteLine("# include <iostream>");
                 sw.WriteLine("# include <string>");
-                sw.WriteLine("# include <stack>");
+                sw.WriteLine("# include <vector>");
                 sw.WriteLine("using namespace std;");
 
                 for (int i = 0; i < variables.Count; i++)
@@ -414,8 +414,8 @@ namespace jazTranslator
                 {
                     sw.WriteLine("void " + functions[i] + "();");
                 }
-                sw.WriteLine("stack<int> int_stack;");
-                sw.WriteLine("stack<int*> pointer_stack;");
+                sw.WriteLine("vector<int> int_stack;");
+                sw.WriteLine("vector<int*>pointer_stack;");
                 sw.WriteLine("int main() {");
             }
         }
@@ -440,7 +440,7 @@ namespace jazTranslator
         static void readJazLines()
         {
             string line;
-            StreamReader file = new StreamReader(@"jaz specs and examples (1)\operatorsTest.jaz");
+            StreamReader file = new StreamReader(@"jaz specs and examples (1)\demo.jaz");
             while ((line = file.ReadLine()) != null)
             {
                 inputLines.Add(line);
