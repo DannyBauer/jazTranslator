@@ -12,7 +12,7 @@ cout << "  This code illustrates basic arithmetic" << endl;
 cout << "  and logical operations." << endl;
 cout << " " << endl;
 int_stack.push_back(var);
-cout << " Variables are initialized to "zero"" << endl;
+cout << " Variables are initialized to \"zero\"" << endl;
 cout << " Value of var is:" << endl;
 cout << int_stack.back() << endl;
 int_stack.pop_back();

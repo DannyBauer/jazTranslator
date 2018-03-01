@@ -20,3 +20,14 @@ C:\Users\dbaue\source\repos\jazTranslator\jazTranslator\obj\Debug\netcoreapp2.0\
 C:\Users\dbaue\source\repos\jazTranslator\jazTranslator\obj\Debug\netcoreapp2.0\jazTranslator.AssemblyInfo.cs
 C:\Users\dbaue\source\repos\jazTranslator\jazTranslator\obj\Debug\netcoreapp2.0\jazTranslator.dll
 C:\Users\dbaue\source\repos\jazTranslator\jazTranslator\obj\Debug\netcoreapp2.0\jazTranslator.pdb
+C:\Users\Dave\Documents\Visual Studio 2017\Projects\jazTranslator\jazTranslator\bin\Debug\netcoreapp2.0\jazTranslator.deps.json
+C:\Users\Dave\Documents\Visual Studio 2017\Projects\jazTranslator\jazTranslator\bin\Debug\netcoreapp2.0\jazTranslator.runtimeconfig.json
+C:\Users\Dave\Documents\Visual Studio 2017\Projects\jazTranslator\jazTranslator\bin\Debug\netcoreapp2.0\jazTranslator.runtimeconfig.dev.json
+C:\Users\Dave\Documents\Visual Studio 2017\Projects\jazTranslator\jazTranslator\bin\Debug\netcoreapp2.0\jazTranslator.dll
+C:\Users\Dave\Documents\Visual Studio 2017\Projects\jazTranslator\jazTranslator\bin\Debug\netcoreapp2.0\jazTranslator.pdb
+C:\Users\Dave\Documents\Visual Studio 2017\Projects\jazTranslator\jazTranslator\obj\Debug\netcoreapp2.0\jazTranslator.csproj.CoreCompileInputs.cache
+C:\Users\Dave\Documents\Visual Studio 2017\Projects\jazTranslator\jazTranslator\obj\Debug\netcoreapp2.0\jazTranslator.AssemblyInfoInputs.cache
+C:\Users\Dave\Documents\Visual Studio 2017\Projects\jazTranslator\jazTranslator\obj\Debug\netcoreapp2.0\jazTranslator.AssemblyInfo.cs
+C:\Users\Dave\Documents\Visual Studio 2017\Projects\jazTranslator\jazTranslator\obj\Debug\netcoreapp2.0\jazTranslator.dll
+C:\Users\Dave\Documents\Visual Studio 2017\Projects\jazTranslator\jazTranslator\obj\Debug\netcoreapp2.0\jazTranslator.pdb
+C:\Users\Dave\Documents\Visual Studio 2017\Projects\jazTranslator\jazTranslator\obj\Debug\netcoreapp2.0\jazTranslator.csprojResolveAssemblyReference.cache

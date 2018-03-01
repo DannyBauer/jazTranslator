@@ -664,7 +664,8 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\d.bauer\\.nuget\\packages\\": {},
+    "C:\\Users\\Dave\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -673,18 +674,20 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "E:\\Project Files\\jazTranslator\\jazTranslator\\jazTranslator\\jazTranslator.csproj",
+      "projectUniqueName": "C:\\Users\\Dave\\Documents\\Visual Studio 2017\\Projects\\jazTranslator\\jazTranslator\\jazTranslator.csproj",
       "projectName": "jazTranslator",
-      "projectPath": "E:\\Project Files\\jazTranslator\\jazTranslator\\jazTranslator\\jazTranslator.csproj",
-      "packagesPath": "C:\\Users\\d.bauer\\.nuget\\packages\\",
-      "outputPath": "E:\\Project Files\\jazTranslator\\jazTranslator\\jazTranslator\\obj\\",
+      "projectPath": "C:\\Users\\Dave\\Documents\\Visual Studio 2017\\Projects\\jazTranslator\\jazTranslator\\jazTranslator.csproj",
+      "packagesPath": "C:\\Users\\Dave\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dave\\Documents\\Visual Studio 2017\\Projects\\jazTranslator\\jazTranslator\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\d.bauer\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Dave\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
@@ -709,7 +712,7 @@
         "dependencies": {
           "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "2.0.0",
+            "version": "[2.0.0, )",
             "autoReferenced": true
           }
         },

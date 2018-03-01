@@ -135,16 +135,19 @@ namespace jazTranslator
         {
             string newInstruction = "";
             int wordCount = instruction.Count;
-            newInstruction = newInstruction + "cout << \"";
+            string newInstructionBeg = newInstruction + "cout << \"";
             for (int i = iterator + 1; i < wordCount; i++)
             {
-                if (newInstruction.Contains("\""))
-                {
-                    newInstruction.Replace("\"", "\\" + "\""); 
-                }
                 newInstruction = newInstruction + " " + instruction[i];
             }
+
+            if (newInstruction.Contains("\""))
+            {
+                newInstruction = newInstruction.Replace("\"", "\\" + "\"");
+            }
+
             newInstruction = newInstruction + "\" << endl;";
+            newInstruction = newInstructionBeg + newInstruction;
 
             if (outputListTracker == 0)
                 outputLines.Add(newInstruction);
