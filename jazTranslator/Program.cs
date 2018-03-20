@@ -131,6 +131,7 @@ namespace jazTranslator
 
             Console.ReadLine();
         }
+
         static void show(List<string> instruction)
         {
             string newInstruction = "";
