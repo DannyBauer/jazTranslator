@@ -20,14 +20,18 @@ namespace jazTranslator
         {
             readJazLines();
             initialzeProgram();       
-            string instruction;
-            for (int i = 0; i < inputLines.Count(); i++)
+            string instruction;           
+            for (int i = 0; i < inputLines.Count(); i++) //Loop through each line of the inputLines
             {
+                //Break up the line into instructions
                 List<string> instructionList = inputLines[i].Split().ToList();
                 iterator = 0;
+                //Look for the instruction in the line
                 while (instructionList[iterator] == "" && instructionList.Count > 1)
-                    iterator++;
-                instruction = instructionList[iterator];
+                    iterator++;                
+                instruction = instructionList[iterator]; //Instruction found
+
+                //Based on the instruction found, go to its corresponding function
                 switch (instruction)
                 {
                     case "show":
@@ -132,25 +136,28 @@ namespace jazTranslator
             Console.ReadLine();
         }
 
+        //Create a cout statement
         static void show(List<string> instruction)
         {
             string newInstruction = "";
             int wordCount = instruction.Count;
-            string newInstructionBeg = newInstruction + "cout << \"";
+            string newInstructionBeg = newInstruction + "cout << \""; //Start of the line
+            //Add the rest of the line to the cout statement
             for (int i = iterator + 1; i < wordCount; i++)
             {
                 newInstruction = newInstruction + " " + instruction[i];
             }
 
+            //Deal with the escape characters
             if (newInstruction.Contains("\""))
             {
                 newInstruction = newInstruction.Replace("\"", "\\" + "\"");
             }
 
-            newInstruction = newInstruction + "\" << endl;";
+            newInstruction = newInstruction + "\" << endl;"; //end the cout statement
             newInstruction = newInstructionBeg + newInstruction;
 
-            if (outputListTracker == 0)
+            if (outputListTracker == 0) 
                 outputLines.Add(newInstruction);
             else
                 functionLines.Add(newInstruction);
@@ -162,35 +169,44 @@ namespace jazTranslator
             else
                 functionLines.Add("cout << int_stack.back() << endl;");
         }
+
+        //Pushes the value onto the int stack
         static void push(List<string> instruction)
         {
-            string value = instruction[iterator + 1];
+            string value = instruction[iterator + 1]; //Get the value from the line
             
-
+            //Add to output
             if (outputListTracker == 0)
                 outputLines.Add("int_stack.push_back(" + value + ");");
             else
                 functionLines.Add("int_stack.push_back(" + value + ");");
         }
+
+        //Pushes a variable onto the int stack
         static void rvalue(List<string> instruction)
         {
-            string variable = instruction[iterator + 1];
+            string variable = instruction[iterator + 1]; //Get the variable from the line
 
+            //Add to output
             if (outputListTracker == 0)
                 outputLines.Add("int_stack.push_back(" + variable + ");");
             else
                 functionLines.Add("int_stack.push_back(" + variable + ");");
-
         }
+
+        //Pushes a variable onto the pointer stack
         static void lvalue(List<string> instruction)
-        {
-            string variable = instruction[iterator + 1];
+        {           
+            string variable = instruction[iterator + 1]; //Get the variable from the line
            
+            //Add to output
             if (outputListTracker == 0)
                 outputLines.Add("pointer_stack.push_back(&" + variable + ");");
             else
                 functionLines.Add("pointer_stack.push_back(&" + variable + ");");
         }
+
+        //Sets a value equal to another
         static void equals()
         {
             if (outputListTracker == 0)
@@ -206,21 +222,23 @@ namespace jazTranslator
                 functionLines.Add("int_stack.pop_back();");
             }
         }
+
+        //Pops the int stack
         static void pop()
-        {
+        {           
             if (outputListTracker == 0)
             {
-                outputLines.Add("int_stack.pop_back();");
+                outputLines.Add("int_stack.pop_back();"); //Adds the pop command to the output
             }
             else
             {
                 functionLines.Add("int_stack.pop_back();");
             }
         }
-        static void copy()
-        {
-        
 
+        //Copies the top value on the stack and adds it to the stack
+        static void copy()
+        {       
             if (outputListTracker == 0)
             {
                 outputLines.Add("int copy = int_stack.back();");
@@ -232,6 +250,8 @@ namespace jazTranslator
                 functionLines.Add("int_stack.push_back(copy);");
             }
         }
+
+        //Adds a label
         static void label(List<string> instruction)
         {
             if (outputListTracker == 0)
@@ -248,6 +268,8 @@ namespace jazTranslator
             functionLines.Add("int " + instruction[iterator + 1] + "() {");
             outputListTracker = 1;
         }
+
+        //goto a specified label
         static void go_to(List<string> instruction)
         {           
             if (outputListTracker == 0)
@@ -260,6 +282,8 @@ namespace jazTranslator
             }
 
         }
+
+
         static void call(List<string> instruction)
         {
             if (outputListTracker == 0)
@@ -506,8 +530,12 @@ namespace jazTranslator
             }
         }
 
+        /// <summary>
+        /// Sets up the beginning of the cpp file
+        /// </summary>
         static void initialzeProgram()
         {
+            //Remove if it exists
             if (File.Exists("output.cpp"))
             {
                 File.Delete("output.cpp");
@@ -534,20 +562,23 @@ namespace jazTranslator
 
             using (StreamWriter sw = File.CreateText("output.cpp"))
             {
+                //Setup the includes
                 sw.WriteLine("# include \"stdafx.h\"");
                 sw.WriteLine("# include <iostream>");
                 sw.WriteLine("# include <string>");
                 sw.WriteLine("# include <vector>");
                 sw.WriteLine("using namespace std;");
 
+                //Add the variables
                 for (int i = 0; i < variables.Count; i++)
                 {
                     sw.WriteLine("int " + variables[i] + ";");
-                }
+                }                
                 for (int i = 0; i < functions.Count; i++)
                 {
                     sw.WriteLine("int " + functions[i] + "();");
                 }
+                //Add the vectors
                 sw.WriteLine("vector<int> int_stack;");
                 sw.WriteLine("vector<int*>pointer_stack;");
                 sw.WriteLine("int main() {");
@@ -571,13 +602,17 @@ namespace jazTranslator
                 sw.Close();
             }
         }
+   
+        /// <summary>
+        /// Reads in all lines of the jaz file and stores them in a list
+        /// </summary>
         static void readJazLines()
         {
             string line;
             StreamReader file = new StreamReader(@"jaz specs and examples (1)\operatorsTest.jaz");
-            while ((line = file.ReadLine()) != null)
-            {
-                inputLines.Add(line);
+            while ((line = file.ReadLine()) != null) //Loop through all lines
+            { 
+                inputLines.Add(line); //Add the lines to the list
             }
         }
         public static string RandomString(int length)
